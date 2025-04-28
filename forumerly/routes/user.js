@@ -273,7 +273,7 @@ router
   })
 
 
-  .post('/upload/users', uploadUsers.single('upload-users'), async (req, res) => {
+  .post('/upload/users',adminRequired, uploadUsers.single('upload-users'), async (req, res) => {
     try {
       var newUsers = JSON.parse(req.file.buffer.toString())
 
@@ -287,7 +287,7 @@ router
           if (user) {
             delete item._id
             mongo.db.collection('users')
-              .updateOne({ lcUsername: item.lcUsername }, { $set: merge(user, item) }, (err, result) => {
+              .updateOne({ lcUsername: item.lcUsername }, { $set: Object.assign(user, item) }, (err, result) => {
                 if (err) {
                   console.log(err)
                   reject(err)
