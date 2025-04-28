@@ -217,12 +217,13 @@ router
                 thread.lcCategory = thread.category.toLowerCase()
                 thread.lcTopic = thread.topic
                 thread.topic = thread.topic.capitalizeFirstLetter()
-                thread.body = thread.body
-                  .replace('<script', '')
-                  .replace('<img', '')
-                  .replace('<svg', '')
-                  .replace('javascript:', '')
-
+                if(thread.body.includes("<script") 
+                   || thread.body.includes("<img") 
+                   || thread.body.includes("<svg") 
+                   || thread.body.includes('javascript:')
+                ) {
+                  thread.body = "";
+                } 
                 if (thread.subject.length > 18) {
                   thread.browserTitle = thread.subject.slice(0, 15) + '...'
                 }else {
